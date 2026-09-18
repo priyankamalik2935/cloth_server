@@ -16,7 +16,7 @@ import { authenticate } from "../Middleware/auth.js";
 export const router = express.Router();
 
 /* ---------- Public ---------- */
-router.post("/create-account", createAccount);
+router.post("/register", createAccount);
 router.post("/verify-otp", verifyOtp);
 router.post("/resend-otp", resendOtp);
 router.post("/login", loginUser);

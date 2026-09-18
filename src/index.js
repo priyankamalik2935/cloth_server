@@ -25,7 +25,7 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.use("/", router);
+app.use("/api", router);
 
 mongoose
   .connect(process.env.MongoDBURL)

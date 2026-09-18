@@ -1,5 +1,3 @@
-
-
 import nodemailer from "nodemailer";
 
 const BRAND = {
@@ -10,6 +8,7 @@ const BRAND = {
   clientUrl: process.env.CLIENT_URL || "https://eshopping.com",
   year: new Date().getFullYear(),
 };
+
 
 const layout = (title, bodyHtml) => `
 <!DOCTYPE html>
@@ -95,6 +94,7 @@ const infoBox = (text, type = "info") => {
     </div>
   `;
 };
+
 
 const verifyAccount = ({ name, otp }) => ({
   subject: `${BRAND.name} - Verify Your Account`,
@@ -182,7 +182,7 @@ const welcome = ({ name }) => ({
   text: `Welcome ${name}! Your ${BRAND.name} account is verified.`,
 });
 
-/* ---------------- Registry ---------------- */
+
 export const mailFormats = {
   verify: verifyAccount,
   resend: resendOtp,
@@ -194,9 +194,9 @@ export const mailFormats = {
 
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.example.com",
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
   port: Number(process.env.SMTP_PORT) || 587,
-  secure: false,
+  secure: false,                    
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -213,10 +213,10 @@ export const sendMail = async ({ to, template, data = {} }) => {
 
     const info = await transporter.sendMail({
       from: `"${BRAND.team}" <${process.env.SMTP_FROM || "team@example.com"}>`,
-      to,
-      subject,
-      html,
-      text,
+      to,                          
+      subject,                     
+      text,                        
+      html,                        
     });
 
     console.log(`[mail:${template}] sent → ${to} | id: ${info.messageId}`);
